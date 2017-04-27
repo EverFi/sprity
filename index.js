@@ -90,6 +90,7 @@ module.exports = {
     var hasStyle = function () {
       return !!opts.style;
     };
+    style.init();
 
     var stream = vfs.src(opts.src)
       .pipe(tile(opts))
@@ -98,7 +99,7 @@ module.exports = {
       .on('error', handleError())
       .pipe(sprite(opts))
       .on('error', handleError())
-      .pipe(ifStream(hasStyle, style(opts)))
+      .pipe(ifStream(hasStyle, style.style(opts)))
       .on('error', handleError())
       .pipe(toVinyl(opts))
       .on('error', handleError())
